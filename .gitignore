@@ -1,0 +1,13 @@
+# Identifiants MySQL : ne jamais publier
+config/env.php
+
+# Photos envoyees par les utilisateurs
+uploads/annonces/*
+!uploads/annonces/.htaccess
+
+# Fichier de test
+test-db.php
+
+# Divers
+.vscode/
+*.log
