@@ -1,0 +1,308 @@
+<?php
+// Textes de l'espace administrateur (francais / arabe)
+// Utilisation : ta('cle') pour afficher (echappe), ta_brut('cle') pour obtenir le texte brut.
+
+function admin_textes(): array
+{
+    static $t = null;
+
+    if ($t !== null) {
+        return $t;
+    }
+
+    $t = [
+        'fr' => [
+            // General
+            'admin'          => 'Administration',
+            'dashboard'      => 'Tableau de bord',
+            'err_csrf'       => 'Session expirée. Veuillez réessayer.',
+            'delete'         => 'Supprimer',
+            'actions'        => 'Actions',
+            'add'            => 'Ajouter',
+
+            // Tableau de bord
+            'st_pending'     => 'En attente',
+            'st_approved'    => 'Approuvées',
+            'st_expiring'    => 'Expirent sous 7 jours',
+            'st_users'       => 'Utilisateurs',
+            'st_contacts'    => 'Messages du site non lus',
+            'nav_ads'        => 'Annonces',
+            'nav_users'      => 'Utilisateurs',
+            'nav_categories' => 'Catégories',
+            'nav_cities'     => 'Villes',
+            'nav_messages'   => 'Messages du site',
+            'latest_pending' => 'Dernières annonces en attente',
+            'no_pending'     => 'Aucune annonce en attente.',
+            'th_title'       => 'Titre',
+            'th_author'      => 'Auteur',
+            'th_price'       => 'Prix',
+            'th_date'        => 'Date',
+            'process_ads'    => 'Traiter les annonces',
+            'currency'       => 'DH',
+
+            // Annonces
+            'ads_title'      => 'Administration — Annonces',
+            'tab_pending'    => 'En attente',
+            'tab_approved'   => 'Approuvées',
+            'tab_refused'    => 'Refusées',
+            'tab_expired'    => 'Expirées',
+            'tab_all'        => 'Toutes',
+            'badge_pending'  => 'En attente',
+            'badge_approved' => 'Approuvée',
+            'badge_refused'  => 'Refusée',
+            'badge_expired'  => 'Expirée',
+            'featured'       => 'À la une',
+            'none_in_tab'    => 'Aucune annonce dans cette catégorie.',
+            'sent_on'        => 'Envoyée le',
+            'expires_on'     => 'Expire le',
+            'tel'            => 'Tél :',
+            'whatsapp'       => 'WhatsApp',
+            'reason_label'   => 'Motif du refus :',
+            'reason_ph'      => 'Motif du refus',
+            'approve'        => 'Approuver',
+            'feature'        => 'Mettre à la une',
+            'unfeature'      => 'Retirer de la une',
+            'refuse'         => 'Refuser',
+            'confirm_del_ad' => 'Supprimer définitivement cette annonce ?',
+            'ad_not_found'   => 'Annonce introuvable.',
+            'ad_approved'    => 'Annonce approuvée. Elle expirera dans 60 jours.',
+            'reason_len'     => 'Le motif du refus doit contenir entre 3 et 255 caractères.',
+            'ad_refused'     => 'Annonce refusée.',
+            'ad_unfeatured'  => 'Annonce retirée de la une.',
+            'ad_featured'    => 'Annonce mise à la une.',
+            'feature_only'   => 'Seule une annonce approuvée et non expirée peut être mise à la une.',
+            'ad_deleted'     => 'Annonce supprimée.',
+
+            // Utilisateurs
+            'users_title'    => 'Administration — Utilisateurs',
+            'search_ph'      => 'Rechercher un nom ou un e-mail',
+            'th_name'        => 'Nom',
+            'th_email'       => 'E-mail',
+            'th_registered'  => 'Inscrit le',
+            'th_ads'         => 'Annonces',
+            'th_status'      => 'Statut',
+            'admin_badge'    => 'Admin',
+            'active'         => 'Actif',
+            'disabled'       => 'Désactivé',
+            'deactivate'     => 'Désactiver',
+            'activate'       => 'Activer',
+            'confirm_del_user' => 'Supprimer cet utilisateur et toutes ses annonces ?',
+            'no_users'       => 'Aucun utilisateur trouvé.',
+            'user_not_found' => 'Utilisateur introuvable ou non modifiable.',
+            'account_off'    => 'Compte désactivé.',
+            'account_on'     => 'Compte activé.',
+            'user_deleted'   => 'Utilisateur supprimé avec ses annonces.',
+
+            // Categories
+            'cats_title'     => 'Administration — Catégories',
+            'add_category'   => 'Ajouter une catégorie',
+            'fr_name_ph'     => 'Nom en français',
+            'ar_name_ph'     => 'الاسم بالعربية',
+            'th_french'      => 'Français',
+            'th_arabic'      => 'العربية',
+            'active_f'       => 'Active',
+            'disabled_f'     => 'Désactivée',
+            'confirm_del_cat'=> 'Supprimer cette catégorie ?',
+            'cat_names_len'  => 'Les noms (français et arabe) doivent contenir entre 2 et 100 caractères.',
+            'icon_invalid'   => 'Icône invalide.',
+            'cat_exists'     => 'Cette catégorie existe déjà.',
+            'add_error'      => 'Erreur lors de l\'ajout.',
+            'cat_added'      => 'Catégorie ajoutée.',
+            'cat_updated'    => 'Catégorie mise à jour.',
+            'cat_has_ads'    => 'Impossible de supprimer : cette catégorie contient des annonces. Désactivez-la à la place.',
+            'cat_deleted'    => 'Catégorie supprimée.',
+            'icon_tag'       => 'Étiquette',
+            'icon_car'       => 'Voiture',
+            'icon_building'  => 'Immeuble',
+            'icon_phone'     => 'Téléphone',
+            'icon_laptop'    => 'Ordinateur',
+            'icon_home'      => 'Maison',
+            'icon_bag'       => 'Sac',
+            'icon_briefcase' => 'Valise',
+            'icon_trophy'    => 'Trophée',
+            'icon_animals'   => 'Animaux',
+            'icon_tools'     => 'Outils',
+            'icon_book'      => 'Livre',
+            'icon_camera'    => 'Appareil photo',
+            'icon_games'     => 'Jeux',
+            'icon_bike'      => 'Vélo',
+            'icon_music'     => 'Musique',
+            'icon_other'     => 'Autres',
+
+            // Villes
+            'cities_title'   => 'Administration — Villes',
+            'add_city'       => 'Ajouter une ville',
+            'th_users'       => 'Utilisateurs',
+            'confirm_del_city' => 'Supprimer cette ville ?',
+            'city_names_len' => 'Les noms (français et arabe) doivent contenir entre 2 et 80 caractères.',
+            'city_exists'    => 'Cette ville existe déjà.',
+            'city_added'     => 'Ville ajoutée.',
+            'city_has_ads'   => 'Impossible de supprimer : des annonces sont liées à cette ville.',
+            'city_deleted'   => 'Ville supprimée.',
+
+            // Messages du site
+            'msgs_title'     => 'Administration — Messages du site',
+            'no_messages'    => 'Aucun message reçu.',
+            'new'            => 'Nouveau',
+            'reply'          => 'Répondre',
+            'mark_read'      => 'Marquer comme lu',
+            'confirm_del_msg'=> 'Supprimer ce message ?',
+            'msg_deleted'    => 'Message supprimé.',
+        ],
+
+        'ar' => [
+            // General
+            'admin'          => 'الإدارة',
+            'dashboard'      => 'لوحة التحكم',
+            'err_csrf'       => 'انتهت الجلسة. المرجو المحاولة من جديد.',
+            'delete'         => 'حذف',
+            'actions'        => 'الإجراءات',
+            'add'            => 'إضافة',
+
+            // Tableau de bord
+            'st_pending'     => 'في الانتظار',
+            'st_approved'    => 'المقبولة',
+            'st_expiring'    => 'تنتهي خلال 7 أيام',
+            'st_users'       => 'المستخدمون',
+            'st_contacts'    => 'رسائل الموقع غير المقروءة',
+            'nav_ads'        => 'الإعلانات',
+            'nav_users'      => 'المستخدمون',
+            'nav_categories' => 'الفئات',
+            'nav_cities'     => 'المدن',
+            'nav_messages'   => 'رسائل الموقع',
+            'latest_pending' => 'آخر الإعلانات في الانتظار',
+            'no_pending'     => 'لا توجد إعلانات في الانتظار.',
+            'th_title'       => 'العنوان',
+            'th_author'      => 'الكاتب',
+            'th_price'       => 'الثمن',
+            'th_date'        => 'التاريخ',
+            'process_ads'    => 'معالجة الإعلانات',
+            'currency'       => 'درهم',
+
+            // Annonces
+            'ads_title'      => 'الإدارة — الإعلانات',
+            'tab_pending'    => 'في الانتظار',
+            'tab_approved'   => 'المقبولة',
+            'tab_refused'    => 'المرفوضة',
+            'tab_expired'    => 'المنتهية',
+            'tab_all'        => 'الكل',
+            'badge_pending'  => 'في الانتظار',
+            'badge_approved' => 'مقبول',
+            'badge_refused'  => 'مرفوض',
+            'badge_expired'  => 'منتهي',
+            'featured'       => 'مميز',
+            'none_in_tab'    => 'لا توجد إعلانات في هذا القسم.',
+            'sent_on'        => 'أرسل في',
+            'expires_on'     => 'ينتهي في',
+            'tel'            => 'الهاتف:',
+            'whatsapp'       => 'واتساب',
+            'reason_label'   => 'سبب الرفض:',
+            'reason_ph'      => 'سبب الرفض',
+            'approve'        => 'قبول',
+            'feature'        => 'إبراز في الرئيسية',
+            'unfeature'      => 'إزالة الإبراز',
+            'refuse'         => 'رفض',
+            'confirm_del_ad' => 'حذف هذا الإعلان نهائيا؟',
+            'ad_not_found'   => 'الإعلان غير موجود.',
+            'ad_approved'    => 'تم قبول الإعلان. سينتهي بعد 60 يوما.',
+            'reason_len'     => 'يجب أن يتراوح سبب الرفض بين 3 و255 حرفا.',
+            'ad_refused'     => 'تم رفض الإعلان.',
+            'ad_unfeatured'  => 'تمت إزالة الإعلان من الإبراز.',
+            'ad_featured'    => 'تم إبراز الإعلان في الصفحة الرئيسية.',
+            'feature_only'   => 'يمكن إبراز الإعلان المقبول وغير المنتهي فقط.',
+            'ad_deleted'     => 'تم حذف الإعلان.',
+
+            // Utilisateurs
+            'users_title'    => 'الإدارة — المستخدمون',
+            'search_ph'      => 'ابحث عن اسم أو بريد إلكتروني',
+            'th_name'        => 'الاسم',
+            'th_email'       => 'البريد الإلكتروني',
+            'th_registered'  => 'تاريخ التسجيل',
+            'th_ads'         => 'الإعلانات',
+            'th_status'      => 'الحالة',
+            'admin_badge'    => 'مشرف',
+            'active'         => 'نشط',
+            'disabled'       => 'معطل',
+            'deactivate'     => 'تعطيل',
+            'activate'       => 'تفعيل',
+            'confirm_del_user' => 'حذف هذا المستخدم وجميع إعلاناته؟',
+            'no_users'       => 'لم يتم العثور على أي مستخدم.',
+            'user_not_found' => 'المستخدم غير موجود أو لا يمكن تعديله.',
+            'account_off'    => 'تم تعطيل الحساب.',
+            'account_on'     => 'تم تفعيل الحساب.',
+            'user_deleted'   => 'تم حذف المستخدم مع إعلاناته.',
+
+            // Categories
+            'cats_title'     => 'الإدارة — الفئات',
+            'add_category'   => 'إضافة فئة',
+            'fr_name_ph'     => 'الاسم بالفرنسية',
+            'ar_name_ph'     => 'الاسم بالعربية',
+            'th_french'      => 'الفرنسية',
+            'th_arabic'      => 'العربية',
+            'active_f'       => 'مفعلة',
+            'disabled_f'     => 'معطلة',
+            'confirm_del_cat'=> 'حذف هذه الفئة؟',
+            'cat_names_len'  => 'يجب أن يتراوح الاسمان (بالفرنسية والعربية) بين 2 و100 حرف.',
+            'icon_invalid'   => 'أيقونة غير صالحة.',
+            'cat_exists'     => 'هذه الفئة موجودة من قبل.',
+            'add_error'      => 'حدث خطأ أثناء الإضافة.',
+            'cat_added'      => 'تمت إضافة الفئة.',
+            'cat_updated'    => 'تم تحديث الفئة.',
+            'cat_has_ads'    => 'تعذر الحذف: هذه الفئة تحتوي على إعلانات. قم بتعطيلها بدلا من ذلك.',
+            'cat_deleted'    => 'تم حذف الفئة.',
+            'icon_tag'       => 'علامة',
+            'icon_car'       => 'سيارة',
+            'icon_building'  => 'عمارة',
+            'icon_phone'     => 'هاتف',
+            'icon_laptop'    => 'حاسوب',
+            'icon_home'      => 'منزل',
+            'icon_bag'       => 'حقيبة',
+            'icon_briefcase' => 'محفظة عمل',
+            'icon_trophy'    => 'كأس',
+            'icon_animals'   => 'حيوانات',
+            'icon_tools'     => 'أدوات',
+            'icon_book'      => 'كتاب',
+            'icon_camera'    => 'كاميرا',
+            'icon_games'     => 'ألعاب',
+            'icon_bike'      => 'دراجة',
+            'icon_music'     => 'موسيقى',
+            'icon_other'     => 'أخرى',
+
+            // Villes
+            'cities_title'   => 'الإدارة — المدن',
+            'add_city'       => 'إضافة مدينة',
+            'th_users'       => 'المستخدمون',
+            'confirm_del_city' => 'حذف هذه المدينة؟',
+            'city_names_len' => 'يجب أن يتراوح الاسمان (بالفرنسية والعربية) بين 2 و80 حرفا.',
+            'city_exists'    => 'هذه المدينة موجودة من قبل.',
+            'city_added'     => 'تمت إضافة المدينة.',
+            'city_has_ads'   => 'تعذر الحذف: توجد إعلانات مرتبطة بهذه المدينة.',
+            'city_deleted'   => 'تم حذف المدينة.',
+
+            // Messages du site
+            'msgs_title'     => 'الإدارة — رسائل الموقع',
+            'no_messages'    => 'لا توجد رسائل.',
+            'new'            => 'جديد',
+            'reply'          => 'رد',
+            'mark_read'      => 'تعليم كمقروءة',
+            'confirm_del_msg'=> 'حذف هذه الرسالة؟',
+            'msg_deleted'    => 'تم حذف الرسالة.',
+        ],
+    ];
+
+    return $t;
+}
+
+// Texte brut (pour flash(), confirm() en JavaScript, etc.)
+function ta_brut(string $cle): string
+{
+    global $lang;
+    $t = admin_textes();
+    return $t[$lang][$cle] ?? $t['fr'][$cle] ?? $cle;
+}
+
+// Texte echappe pour affichage dans le HTML
+function ta(string $cle): string
+{
+    return htmlspecialchars(ta_brut($cle), ENT_QUOTES, 'UTF-8');
+}
