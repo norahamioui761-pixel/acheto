@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/lang.php';
-$base = '/ACHETO.PROJET/';
+
+// En local (XAMPP) le site est dans /ACHETO.PROJET/ ; sur Vercel il est à la racine.
+$base = (strpos($_SERVER['REQUEST_URI'] ?? '', '/ACHETO.PROJET/') === 0) ? '/ACHETO.PROJET/' : '/';
 ?>
 <footer class="ac-footer">
     <div class="container">
