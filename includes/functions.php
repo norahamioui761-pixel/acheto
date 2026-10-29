@@ -5,8 +5,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// En local (XAMPP) le site est dans /ACHETO.PROJET/ ; sur Vercel il est à la racine.
 if (!defined('BASE_URL')) {
-    define('BASE_URL', '/ACHETO.PROJET/');
+    define(
+        'BASE_URL',
+        (strpos($_SERVER['REQUEST_URI'] ?? '', '/ACHETO.PROJET/') === 0) ? '/ACHETO.PROJET/' : '/'
+    );
 }
 
 // Echappement des donnees affichees (protection XSS)
