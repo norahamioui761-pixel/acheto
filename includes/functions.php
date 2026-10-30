@@ -26,6 +26,17 @@ function redirect(string $chemin)
     exit;
 }
 
+// Adresse d'une photo d'annonce a partir de la valeur de images_annonces.chemin :
+// URL complete (Cloudinary) ou "id/nom.jpg" (fichier local dans uploads/annonces/).
+function url_image(string $chemin): string
+{
+    if (preg_match('#^https?://#i', $chemin)) {
+        return $chemin;
+    }
+
+    return BASE_URL . 'uploads/annonces/' . $chemin;
+}
+
 // Protection CSRF
 function csrf_token(): string
 {
