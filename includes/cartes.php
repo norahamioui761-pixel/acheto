@@ -31,7 +31,7 @@ function carte_annonce(array $a, array $favoris, string $retour, string $lang): 
         <div class="ac-card-img">
             <a href="<?= e($lien) ?>">
                 <?php if (!empty($a['image'])): ?>
-                    <img src="<?= e(BASE_URL . 'uploads/annonces/' . $a['image']) ?>" alt="<?= e($a['titre']) ?>" loading="lazy">
+                    <img src="<?= e(url_image($a['image'])) ?>" alt="<?= e($a['titre']) ?>" loading="lazy">
                 <?php else: ?>
                     <div class="d-flex align-items-center justify-content-center h-100 text-muted-ac">
                         <i class="bi bi-image fs-1"></i>
@@ -53,25 +53,4 @@ function carte_annonce(array $a, array $favoris, string $retour, string $lang): 
             <a href="<?= e($lien) ?>" class="text-decoration-none">
                 <h3 class="ac-card-title"><?= e($a['titre']) ?></h3>
             </a>
-            <div class="ac-card-meta">
-                <i class="bi bi-geo-alt"></i> <?= e($ville) ?> · <?= e($cat) ?>
-            </div>
-            <div class="ac-price"><?= e(formater_prix($a['prix'], $lang)) ?></div>
-        </div>
-    </div>
-    <?php
-    return (string) ob_get_clean();
-}
-
-// Liste des id favoris d'un utilisateur
-function ids_favoris(PDO $pdo, ?int $utilisateur_id): array
-{
-    if (!$utilisateur_id) {
-        return [];
-    }
-
-    $stmt = $pdo->prepare('SELECT annonce_id FROM favoris WHERE utilisateur_id = :u');
-    $stmt->execute(['u' => $utilisateur_id]);
-
-    return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
-}
+            <div
