@@ -55,7 +55,7 @@ $images = [];
 foreach (($b['images'] ?? []) as $nom) {
     if (is_string($nom)
         && preg_match('/^[a-f0-9]{32}\.(jpg|png|webp)$/', $nom)
-        && is_file(dossier_uploads($b['dossier']) . '/' . $nom)) {
+        && image_temporaire_existe($b['dossier'], $nom)) {
         $images[] = $nom;
     }
 }
@@ -121,23 +121,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $annonce_id    = (int) $pdo->lastInsertId();
                 $dossier_final = dossier_uploads((string) $annonce_id);
 
-                if (!is_dir($dossier_final) && !mkdir($dossier_final, 0755, true)) {
-                    throw new RuntimeException('Dossier final impossible a creer');
-                }
-
                 $ins_img = $pdo->prepare(
                     'INSERT INTO images_annonces (annonce_id, chemin, est_principale, ordre)
                      VALUES (:a, :chemin, :p, :o)'
                 );
 
                 foreach ($images as $i => $nom) {
-                    $source = dossier_uploads($b['dossier']) . '/' . $nom;
-                    if (!rename($source, $dossier_final . '/' . $nom)) {
-                        throw new RuntimeException('Deplacement de la photo impossible');
-                    }
+                    // Cloudinary : URL complete ; local : "id/nom.jpg" (fichier deplace)
+                    $chemin = finaliser_image($b['dossier'], $nom, $annonce_id);
                     $ins_img->execute([
                         'a'      => $annonce_id,
-                        'chemin' => $annonce_id . '/' . $nom,
+                        'chemin' => $chemin,
                         'p'      => $i === 0 ? 1 : 0,
                         'o'      => $i,
                     ]);
@@ -168,7 +162,6 @@ $page_title = $tx['title'];
 require_once __DIR__ . '/../includes/header.php';
 
 $style_carte = 'background:var(--ac-surface); border:1px solid var(--ac-border); border-radius:var(--ac-radius); box-shadow:var(--ac-shadow);';
-$url_dossier = BASE_URL . 'uploads/annonces/' . $b['dossier'] . '/';
 $prix_aff    = rtrim(rtrim(number_format((float) $b['prix'], 2, ',', ' '), '0'), ',');
 ?>
 
@@ -199,12 +192,12 @@ $prix_aff    = rtrim(rtrim(number_format((float) $b['prix'], 2, ',', ' '), '0'),
 
             <div class="p-4 mb-4" style="<?= $style_carte ?>">
 
-                <img class="apercu-main mb-2" id="photoPrincipale" src="<?= e($url_dossier . $images[0]) ?>" alt="<?= e($b['titre']) ?>">
+                <img class="apercu-main mb-2" id="photoPrincipale" src="<?= e(url_image_temporaire($b['dossier'], $images[0])) ?>" alt="<?= e($b['titre']) ?>">
 
                 <?php if (count($images) > 1): ?>
                     <div class="d-flex flex-wrap gap-2 mb-3">
                         <?php foreach ($images as $i => $nom): ?>
-                            <img class="apercu-thumb <?= $i === 0 ? 'on' : '' ?>" src="<?= e($url_dossier . $nom) ?>" alt="">
+                            <img class="apercu-thumb <?= $i === 0 ? 'on' : '' ?>" src="<?= e(url_image_temporaire($b['dossier'], $nom)) ?>" alt="">
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
