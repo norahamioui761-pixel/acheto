@@ -53,4 +53,25 @@ function carte_annonce(array $a, array $favoris, string $retour, string $lang): 
             <a href="<?= e($lien) ?>" class="text-decoration-none">
                 <h3 class="ac-card-title"><?= e($a['titre']) ?></h3>
             </a>
-            <div
+            <div class="ac-card-meta">
+                <i class="bi bi-geo-alt"></i> <?= e($ville) ?> · <?= e($cat) ?>
+            </div>
+            <div class="ac-price"><?= e(formater_prix($a['prix'], $lang)) ?></div>
+        </div>
+    </div>
+    <?php
+    return (string) ob_get_clean();
+}
+
+// Liste des id favoris d'un utilisateur
+function ids_favoris(PDO $pdo, ?int $utilisateur_id): array
+{
+    if (!$utilisateur_id) {
+        return [];
+    }
+
+    $stmt = $pdo->prepare('SELECT annonce_id FROM favoris WHERE utilisateur_id = :u');
+    $stmt->execute(['u' => $utilisateur_id]);
+
+    return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
+}
