@@ -31,7 +31,7 @@ function carte_annonce(array $a, array $favoris, string $retour, string $lang): 
         <div class="ac-card-img">
             <a href="<?= e($lien) ?>">
                 <?php if (!empty($a['image'])): ?>
-                    <img src="<?= e(BASE_URL . 'uploads/annonces/' . $a['image']) ?>" alt="<?= e($a['titre']) ?>" loading="lazy">
+                    <img src="<?= e(url_image($a['image'])) ?>" alt="<?= e($a['titre']) ?>" loading="lazy">
                 <?php else: ?>
                     <div class="d-flex align-items-center justify-content-center h-100 text-muted-ac">
                         <i class="bi bi-image fs-1"></i>

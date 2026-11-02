@@ -5,8 +5,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// En local (XAMPP) le site est dans /ACHETO.PROJET/ ; sur Vercel il est à la racine.
 if (!defined('BASE_URL')) {
-    define('BASE_URL', '/ACHETO.PROJET/');
+    define(
+        'BASE_URL',
+        (strpos($_SERVER['REQUEST_URI'] ?? '', '/ACHETO.PROJET/') === 0) ? '/ACHETO.PROJET/' : '/'
+    );
 }
 
 // Echappement des donnees affichees (protection XSS)
@@ -20,6 +24,17 @@ function redirect(string $chemin)
 {
     header('Location: ' . BASE_URL . ltrim($chemin, '/'));
     exit;
+}
+
+// Adresse d'une photo d'annonce a partir de la valeur de images_annonces.chemin :
+// URL complete (Cloudinary) ou "id/nom.jpg" (fichier local dans uploads/annonces/).
+function url_image(string $chemin): string
+{
+    if (preg_match('#^https?://#i', $chemin)) {
+        return $chemin;
+    }
+
+    return BASE_URL . 'uploads/annonces/' . $chemin;
 }
 
 // Protection CSRF

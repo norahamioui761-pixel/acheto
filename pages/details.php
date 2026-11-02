@@ -158,13 +158,13 @@ $statut_affiche = $a['statut'] === 'approuvee' ? 'expiree' : $a['statut'];
         <div class="col-12 col-lg-7">
             <?php if ($photos): ?>
                 <img class="det-main mb-2" id="photoPrincipale"
-                     src="<?= e(BASE_URL . 'uploads/annonces/' . $photos[0]) ?>" alt="<?= e($a['titre']) ?>">
+                     src="<?= e(url_image($photos[0])) ?>" alt="<?= e($a['titre']) ?>">
 
                 <?php if (count($photos) > 1): ?>
                     <div class="d-flex flex-wrap gap-2">
                         <?php foreach ($photos as $i => $p): ?>
                             <img class="det-thumb <?= $i === 0 ? 'on' : '' ?>"
-                                 src="<?= e(BASE_URL . 'uploads/annonces/' . $p) ?>" alt="">
+                                 src="<?= e(url_image($p)) ?>" alt="">
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
