@@ -163,7 +163,7 @@ $style_carte = 'background:var(--ac-surface); border:1px solid var(--ac-border);
 
             <div class="p-3 mb-3 d-flex gap-3 align-items-center" style="<?= $style_carte ?>">
                 <?php if ($a['image']): ?>
-                    <img src="<?= e(BASE_URL . 'uploads/annonces/' . $a['image']) ?>" alt=""
+                    <img src="<?= e(url_image($a['image'])) ?>" alt=""
                          style="width:72px; height:72px; object-fit:cover; border-radius:8px;">
                 <?php endif; ?>
                 <div>
