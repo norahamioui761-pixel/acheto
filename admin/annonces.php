@@ -191,13 +191,13 @@ $style_carte = 'background:var(--ac-surface); border:1px solid var(--ac-border);
 
                 <div class="col-12 col-md-4">
                     <?php if ($photos): ?>
-                        <img src="<?= e(BASE_URL . 'uploads/annonces/' . $photos[0]) ?>" alt=""
+                        <img src="<?= e(url_image($photos[0])) ?>" alt=""
                              style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
                         <?php if (count($photos) > 1): ?>
                             <div class="d-flex flex-wrap gap-1 mt-2">
                                 <?php foreach (array_slice($photos, 1) as $p): ?>
-                                    <a href="<?= e(BASE_URL . 'uploads/annonces/' . $p) ?>" target="_blank" rel="noopener">
-                                        <img src="<?= e(BASE_URL . 'uploads/annonces/' . $p) ?>" alt=""
+                                    <a href="<?= e(url_image($p)) ?>" target="_blank" rel="noopener">
+                                        <img src="<?= e(url_image($p)) ?>" alt=""
                                              style="width:56px; height:56px; object-fit:cover; border-radius:6px; border:1px solid var(--ac-border);">
                                     </a>
                                 <?php endforeach; ?>
