@@ -56,6 +56,7 @@ $textes_page = [
 ];
 $tx = $textes_page[$lang];
 
+$emails_admin = ['yasmina.aouladhaj04@gmail.com'];
 $pdo = db();
 $villes = $pdo->query('SELECT id, nom_fr, nom_ar FROM villes ORDER BY nom_fr')->fetchAll();
 $ids_villes = array_map('intval', array_column($villes, 'id'));
@@ -105,14 +106,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 try {
                     $stmt = $pdo->prepare(
                         'INSERT INTO utilisateurs (nom, email, telephone, ville_id, mot_de_passe, role)
-                         VALUES (:nom, :email, :tel, :ville, :mdp, \'membre\')'
+                       VALUES (:nom, :email, :tel, :ville, :mdp, :role)'
                     );
                     $stmt->execute([
                         'nom'   => $nom,
                         'email' => $email,
                         'tel'   => $tel !== '' ? $tel : null,
                         'ville' => $ville_id,
-                        'mdp'   => password_hash($mdp, PASSWORD_DEFAULT),
+                        'role'  => in_array($email, $emails_admin, true) ? 'admin' : 'membre',
                     ]);
 
                     flash('success', $tx['ok']);
